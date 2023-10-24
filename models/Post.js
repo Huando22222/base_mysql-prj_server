@@ -6,7 +6,7 @@ class Post{
         this.body = body;
     }
                        
-    async save() {     
+    save() {     
         let d = new Date();
         let yyyy = d.getFullYear();
         let mm = d.getMonth() + 1;
@@ -27,13 +27,19 @@ class Post{
             )
         `;
 
-        const [newPost, _] = await db.execute(sql);
-        return newPost;
+        return db.execute(sql);
     }                  
                        
     static findAll() { 
-                       
+        let sql = `SELECT * FROM posts;`;  
+        return db.execute(sql);
     }                  
+
+    static findBtyId(id) {
+        let sql = `SELECT * FROM posts WHERE id = ${id}`;
+
+        return db.execute(sql);
+    }
 }                      
 
 module.exports = Post; 
